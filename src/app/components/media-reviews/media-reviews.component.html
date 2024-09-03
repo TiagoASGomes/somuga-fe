@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <div class="column gap-1">
+    <div class="row gap-05" *ngFor="let review of reviews">
+      <div class="column gap-1">
+        <div class="">{{ review.user.username }}</div>
+        <div class="">{{ review.reviewScore }}/10</div>
+      </div>
+      <div>{{ review.writtenReview }}</div>
+    </div>
+  </div>
+</div>

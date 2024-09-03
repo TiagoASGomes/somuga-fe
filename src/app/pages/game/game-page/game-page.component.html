@@ -1,1 +1,26 @@
-<p>game-page works!</p>
+<div class="wrapper">
+  <div *ngIf="game" class="row gap-2">
+    <app-media-page-title-card
+      [media]="game"
+      [isLiked]="isLiked"
+      [isReviewed]="isReviewed"
+      (likeMedia)="likeGame()"
+      (reviewMedia)="toggleReviewPopUp($event)"
+    ></app-media-page-title-card>
+    <div>
+      <h3>Description:</h3>
+      <p>{{ game.description }}</p>
+      <h3>Released:</h3>
+      <p>{{ game.releaseDate | date : "longDate" }}</p>
+      <h3>Developer:</h3>
+      <p>{{ game.developer.developerName }}</p>
+      <h3>Genres:</h3>
+      <p *ngFor="let genre of game.genres">{{ genre.genreName }}</p>
+      <h3>Platforms:</h3>
+      <p *ngFor="let platform of game.platforms">{{ platform.platformName }}</p>
+    </div>
+  </div>
+  <app-media-reviews *ngIf="game" [mediaId]="game.id"></app-media-reviews>
+</div>
+
+<app-review-pop-up *ngIf="game" [mediaId]="game.id" [(display)]="displayReviewPopUp"></app-review-pop-up>

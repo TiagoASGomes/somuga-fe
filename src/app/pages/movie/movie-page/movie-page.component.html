@@ -1,1 +1,34 @@
-<p>movie-page works!</p>
+<div class="wrapper">
+  <div *ngIf="movie" class="row gap-2">
+    <app-media-page-title-card
+      [media]="movie"
+      [isLiked]="isLiked"
+      [isReviewed]="isReviewed"
+      (likeMedia)="like()"
+      (reviewMedia)="toggleReviewPopUp($event)"
+    ></app-media-page-title-card>
+    <div>
+      <h3>Description:</h3>
+      <p>{{ movie.description }}</p>
+      <h3>Released:</h3>
+      <p>{{ movie.releaseDate | date : "longDate" }}</p>
+      <h3>Director:</h3>
+      <p>{{ getDirector() }}</p>
+      <h3>Writers:</h3>
+      <p *ngFor="let writer of getWriters()">{{ writer }}</p>
+      <h3>Producers</h3>
+      <p *ngFor="let producer of getProducers()">{{ producer }}</p>
+      <h3>Actors:</h3>
+      <div *ngFor="let actor of getActors()">
+        <p>{{ actor.fullName }}</p>
+        <p>{{ actor.characterName }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-review-pop-up
+  *ngIf="movie"
+  [mediaId]="movie.id"
+  [(display)]="displayReviewPopUp"
+></app-review-pop-up>

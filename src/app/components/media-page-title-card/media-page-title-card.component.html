@@ -1,0 +1,26 @@
+<div class="column gap-2">
+  <div class="img-container">
+    <img src="{{ media.imageUrl }}" alt="{{ media.title }}" />
+  </div>
+  <h2>{{ media.title }}</h2>
+  <div class="row gap-1">
+    <div>
+      <p>Likes: {{ media.likes }}</p>
+      <p-button
+        [label]="isLiked ? 'Dislike' : 'Like'"
+        [icon]="isLiked ? 'pi pi-heart' : 'pi pi-heart-fill'"
+        iconPos="right"
+        (onClick)="like()"
+      ></p-button>
+    </div>
+    <div>
+      <p>Rating: {{ media.averageRating }}</p>
+      <p-button
+        [label]="isReviewed ? 'Edit Review' : 'Review'"
+        [icon]="isReviewed ? 'pi pi-pencil' : 'pi pi-comment'"
+        iconPos="right"
+        (onClick)="review()"
+      ></p-button>
+    </div>
+  </div>
+</div>

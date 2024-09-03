@@ -1,0 +1,18 @@
+<div class="column gap-1 wrapper full-center">
+  <img
+    [src]="media.imageUrl"
+    [alt]="media.title"
+    [routerLink]="'/' + mediaType + '/' + media.id"
+  />
+  <h2 class="title">{{ media.title | truncateString : 20 : "..." }}</h2>
+
+  <p>Released: {{ media.releaseDate }}</p>
+
+  <p-rating
+    [(ngModel)]="stars"
+    [readonly]="true"
+    iconCancelClass="hidden"
+  ></p-rating>
+  <p>{{ media.likes }} <i class="pi pi-thumbs-up"></i></p>
+  <p>{{ media.description | truncateString : 75 : "..." }}</p>
+</div>

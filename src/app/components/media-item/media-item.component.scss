@@ -1,0 +1,22 @@
+.wrapper {
+  width: 300px;
+  background-color: gray;
+  border-radius: 15px;
+  border: 3px solid black;
+  padding: 1rem;
+
+  img {
+    border: 3px solid black;
+    object-fit: contain;
+    width: 100%;
+  }
+
+  img:hover {
+    cursor: pointer;
+  }
+  
+  .title {
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+}

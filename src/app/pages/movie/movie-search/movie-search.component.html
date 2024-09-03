@@ -1,1 +1,47 @@
-<p>movie-search works!</p>
+<div class="column gap-1 full-center mh-5">
+  <div class="searchBar row gap-1 full-center" [formGroup]="searchParamsForm">
+    <div class="row gap-1 full-center">
+      <label for="name">Title</label>
+      <input
+        pInputText
+        formControlName="title"
+        type="text"
+        id="Title"
+        placeholder="Title"
+      />
+    </div>
+    <div class="row gap-1 full-center">
+      <label for="developer">Cast</label>
+      <p-multiSelect
+        [options]="cast"
+        formControlName="crewIds"
+        optionLabel="name"
+        placeholder="Select Cast members"
+        [filter]="true"
+        filterBy="name"
+        [showClear]="true"
+      >
+      </p-multiSelect>
+    </div>
+    <button
+      pButton
+      type="button"
+      label="Search"
+      (click)="changeParams()"
+      class="p-button-raised p-button-rounded"
+    ></button>
+  </div>
+  <div class="row wrap gap-2 space-between">
+    <app-media-item
+      *ngFor="let movie of movies"
+      [media]="movie"
+    ></app-media-item>
+  </div>
+  <p-paginator
+    [rows]="size"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[5, 10, 25, 50]"
+    (onPageChange)="onPageChange($event)"
+    #paginator
+  ></p-paginator>
+</div>

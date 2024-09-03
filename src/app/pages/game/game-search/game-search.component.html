@@ -1,1 +1,66 @@
-<p>game-search works!</p>
+<div class="column gap-1 full-center mh-5">
+  <div class="searchBar row gap-1 full-center" [formGroup]="searchParamsForm">
+    <div class="row gap-1 full-center">
+      <label for="name">Title</label>
+      <input
+        pInputText
+        formControlName="title"
+        type="text"
+        id="Title"
+        placeholder="Title"
+      />
+    </div>
+    <div class="row gap-1 full-center">
+      <label for="developer">Developer</label>
+      <p-dropdown
+        [options]="developers"
+        formControlName="developer"
+        optionLabel="name"
+        placeholder="Select Developer"
+        [filter]="true"
+        filterBy="name"
+        [showClear]="true"
+      >
+      </p-dropdown>
+    </div>
+    <div class="row gap-1 full-center">
+      <label for="genre">Genres</label>
+      <p-multiSelect
+        [options]="genres"
+        formControlName="genre"
+        optionLabel="name"
+        placeholder="Select Genres"
+        [filter]="true"
+        [showClear]="true"
+      />
+    </div>
+    <div class="row gap-1 full-center">
+      <label for="platform">Platforms</label>
+      <p-multiSelect
+        [options]="platforms"
+        formControlName="platform"
+        optionLabel="name"
+        placeholder="Select Platforms"
+        [filter]="true"
+        [showClear]="true"
+      />
+    </div>
+    <button
+      pButton
+      type="button"
+      label="Search"
+      (click)="changeParams()"
+      class="p-button-raised p-button-rounded"
+    ></button>
+  </div>
+  <div class="row wrap gap-2 space-between">
+    <app-media-item *ngFor="let game of games" [media]="game"></app-media-item>
+  </div>
+  <p-paginator
+    [rows]="size"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[5, 10, 25, 50]"
+    (onPageChange)="onPageChange($event)"
+    #paginator
+  ></p-paginator>
+</div>
