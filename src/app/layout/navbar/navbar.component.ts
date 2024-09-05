@@ -5,7 +5,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from '@auth0/auth0-angular';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/user/user.service';
 import { User } from '../../../types';
 
 @Component({
@@ -35,6 +35,10 @@ export class NavbarComponent {
           label: 'Games List',
           routerLink: ['game'],
         },
+        {
+          label: 'Developers',
+          routerLink: ['game/developer'],
+        }
       ],
     },
     {
@@ -55,6 +59,7 @@ export class NavbarComponent {
   }
 
   logout() {
+    localStorage.removeItem('userId');
     this.auth.logout();
   }
 
@@ -79,7 +84,6 @@ export class NavbarComponent {
                 )
                 .subscribe({
                   next: (user) => {
-                    console.log(user);
                     localStorage.setItem('userId', user.id);
                   },
                   error: (error) => {

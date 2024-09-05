@@ -10,16 +10,18 @@
         [label]="isLiked ? 'Dislike' : 'Like'"
         [icon]="isLiked ? 'pi pi-heart' : 'pi pi-heart-fill'"
         iconPos="right"
-        (onClick)="like()"
+        (onClick)="isLiked ? dislike() : like()"
+        [disabled]="!isLogged"
       ></p-button>
     </div>
     <div>
       <p>Rating: {{ media.averageRating }}</p>
       <p-button
-        [label]="isReviewed ? 'Edit Review' : 'Review'"
-        [icon]="isReviewed ? 'pi pi-pencil' : 'pi pi-comment'"
+        [label]="review.id !== -1 ? 'Edit Review' : 'Review'"
+        [icon]="review.id !== -1 ? 'pi pi-pencil' : 'pi pi-comment'"
         iconPos="right"
-        (onClick)="review()"
+        (onClick)="reviewToggle()"
+        [disabled]="!isLogged"
       ></p-button>
     </div>
   </div>

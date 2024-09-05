@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
+import { ApiService } from '../api.service';
 import {
   MovieCrewList,
   MovieLike,
   MovieList,
   MovieSearchParams,
   PaginationParams,
-} from '../../types';
-import { environment } from '../../environments/environment';
+} from '../../../types';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -32,17 +32,6 @@ export class MovieService {
     return this.apiService.get<MovieLike>(
       environment.apiUrl + 'movie/public/' + id,
       {}
-    );
-  }
-
-  getCast(pageParams: PaginationParams): Observable<MovieCrewList> {
-    return this.apiService.get<MovieCrewList>(
-      environment.apiUrl + 'movie/crew/public',
-      {
-        params: {
-          ...pageParams,
-        },
-      }
     );
   }
 }

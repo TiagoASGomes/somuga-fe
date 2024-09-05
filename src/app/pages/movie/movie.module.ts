@@ -12,6 +12,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { MediaPageTitleCardComponent } from '../../components/media-page-title-card/media-page-title-card.component';
 import { ReviewPopUpComponent } from '../../components/review-pop-up/review-pop-up.component';
+import { MediaReviewsComponent } from '../../components/media-reviews/media-reviews.component';
 
 @NgModule({
   declarations: [MovieSearchComponent, MoviePageComponent],
@@ -27,6 +28,7 @@ import { ReviewPopUpComponent } from '../../components/review-pop-up/review-pop-
     ButtonModule,
     MediaPageTitleCardComponent,
     ReviewPopUpComponent,
+    MediaReviewsComponent,
   ],
 })
 export class MovieModule {}

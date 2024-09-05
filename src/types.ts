@@ -51,6 +51,10 @@ export interface MovieSearchParams extends SearchParams {
   crewIds?: number[];
 }
 
+export interface DeveloperSearchParams extends SearchParams {
+  name?: string;
+}
+
 export interface Media {
   id: number;
   title: string;
@@ -86,7 +90,7 @@ export interface GameList {
 
 export interface GameLike {
   game: Game;
-  like: boolean;
+  liked: boolean;
 }
 
 export interface Developer {
@@ -137,7 +141,7 @@ export interface MovieList {
 
 export interface MovieLike {
   movie: Movie;
-  like: boolean;
+  liked: boolean;
 }
 
 export interface Roles {
@@ -164,7 +168,7 @@ export interface LikeList {
 
 export interface User {
   id: string;
-  username: string;
+  userName: string;
   email: string;
   joinDate: string;
 }
@@ -201,7 +205,7 @@ export interface MovieCrewRole {
 export interface createReview {
   mediaId: number;
   reviewScore: number;
-  writenReview: string;
+  writtenReview: string;
 }
 
 export interface UpdateReview {
@@ -210,7 +214,7 @@ export interface UpdateReview {
 }
 
 export interface ReviewSearchParams extends SearchParams {
-  userId?: number;
+  userId?: string;
   mediaId?: number;
 }
 
@@ -218,6 +222,12 @@ export interface Review {
   id: number;
   user: User;
   mediaId: number;
+  reviewScore: number;
+  writtenReview: string;
+}
+
+export interface ShortReview {
+  id: number;
   reviewScore: number;
   writtenReview: string;
 }

@@ -5,9 +5,10 @@ import {
   MovieList,
   MovieSearchParams,
 } from '../../../../types';
-import { MovieService } from '../../../services/movie.service';
+import { MovieService } from '../../../services/movie/movie.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Paginator } from 'primeng/paginator';
+import { CrewService } from '../../../services/movie/crew/crew.service';
 
 interface DropdownOption {
   name: string;
@@ -24,7 +25,8 @@ export class MovieSearchComponent {
 
   constructor(
     private movieService: MovieService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private crewService: CrewService
   ) {}
   movies: Movie[] = [];
   cast: DropdownOption[] = [];
@@ -32,7 +34,7 @@ export class MovieSearchComponent {
     title: '',
     crewIds: [],
   };
-  size: number = 20;
+  size: number = 25;
   totalRecords: number = 0;
 
   searchParamsForm = this.formBuilder.group({
@@ -67,7 +69,7 @@ export class MovieSearchComponent {
   }
 
   fetchCast(page: number, size: number) {
-    this.movieService.getCast({ page, size }).subscribe({
+    this.crewService.getCast({ page, size }).subscribe({
       next: (data: MovieCrewList) => {
         const newCast = data.movieCrews.map((c) => ({
           name: c.name,

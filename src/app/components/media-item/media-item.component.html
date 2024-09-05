@@ -2,7 +2,7 @@
   <img
     [src]="media.imageUrl"
     [alt]="media.title"
-    [routerLink]="'/' + mediaType + '/' + media.id"
+    [routerLink]="'/' + mediaType + '/info/' + media.id"
   />
   <h2 class="title">{{ media.title | truncateString : 20 : "..." }}</h2>
 

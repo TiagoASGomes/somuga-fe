@@ -1,0 +1,6 @@
+<div class="wrapper">
+  <h1 class="name">{{ developer.developerName }}</h1>
+  <div class="row wrap gap-2 space-between">
+    <app-media-item *ngFor="let game of games" [media]="game"></app-media-item>
+  </div>
+</div>

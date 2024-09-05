@@ -6,7 +6,7 @@ import { MoviePageComponent } from './movie-page/movie-page.component';
 const routes: Routes = [
   { path: '', component: MovieSearchComponent },
   {
-    path: ':id',
+    path: 'info/:id',
     component: MoviePageComponent,
   },
 ];

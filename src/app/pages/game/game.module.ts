@@ -12,9 +12,17 @@ import { ButtonModule } from 'primeng/button';
 import { MediaPageTitleCardComponent } from '../../components/media-page-title-card/media-page-title-card.component';
 import { MediaReviewsComponent } from '../../components/media-reviews/media-reviews.component';
 import { ReviewPopUpComponent } from '../../components/review-pop-up/review-pop-up.component';
+import { DeveloperSearchComponent } from './developer-search/developer-search.component';
+import { DeveloperPageComponent } from './developer-page/developer-page.component';
+import { MediaListComponent } from '../../components/media-list/media-list.component';
 
 @NgModule({
-  declarations: [GamePageComponent, GameSearchComponent],
+  declarations: [
+    GamePageComponent,
+    GameSearchComponent,
+    DeveloperSearchComponent,
+    DeveloperPageComponent,
+  ],
   imports: [
     CommonModule,
     GameRoutingModule,
@@ -27,7 +35,8 @@ import { ReviewPopUpComponent } from '../../components/review-pop-up/review-pop-
     ButtonModule,
     MediaPageTitleCardComponent,
     MediaReviewsComponent,
-    ReviewPopUpComponent
+    ReviewPopUpComponent,
+    MediaListComponent,
   ],
 })
 export class GameModule {}

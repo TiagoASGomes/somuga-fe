@@ -1,0 +1,37 @@
+<div class="column gap-1 full-center mh-5">
+  <div class="searchBar row gap-1 full-center" [formGroup]="searchForm">
+    <div class="row gap-1 full-center">
+      <label for="name">Title</label>
+      <input
+        pInputText
+        formControlName="name"
+        type="text"
+        id="Title"
+        placeholder="Name"
+      />
+    </div>
+    <button
+      pButton
+      type="button"
+      label="Search"
+      (click)="changeParams()"
+      class="p-button-raised p-button-rounded"
+    ></button>
+  </div>
+  <div class="row wrap gap-2 space-between">
+    <p
+      class="clickable"
+      *ngFor="let developer of developers"
+      [routerLink]="developer.id.toString()"
+    >
+      {{ developer.developerName }}
+    </p>
+  </div>
+  <p-paginator
+    [rows]="size"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[15, 25, 50, 100]"
+    (onPageChange)="onPageChange($event)"
+    #paginator
+  ></p-paginator>
+</div>

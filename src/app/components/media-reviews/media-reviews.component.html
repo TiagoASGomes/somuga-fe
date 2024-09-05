@@ -1,11 +1,22 @@
-<div class="wrapper">
-  <div class="column gap-1">
-    <div class="row gap-05" *ngFor="let review of reviews">
-      <div class="column gap-1">
-        <div class="">{{ review.user.username }}</div>
-        <div class="">{{ review.reviewScore }}/10</div>
+<div class="wrapper mt-1">
+  <div class="column reviewsContainer">
+    <div class="row gap-2 reviewContainer" *ngFor="let review of reviews">
+      <div class="column pad-1 review-left">
+        <div class="">{{ review.user.userName }}</div>
+        <p-rating
+          [readonly]="true"
+          [ngModel]="review.reviewScore"
+          [stars]="5"
+          [cancel]="false"
+        ></p-rating>
       </div>
-      <div>{{ review.writtenReview }}</div>
+      <div class="pad-1 review-right">{{ review.writtenReview }}</div>
     </div>
+    <p-paginator
+      [rows]="size"
+      [totalRecords]="totalRecords"
+      [rowsPerPageOptions]="[5, 10, 25]"
+      (onPageChange)="onPageChange($event)"
+    ></p-paginator>
   </div>
 </div>

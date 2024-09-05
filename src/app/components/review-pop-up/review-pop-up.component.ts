@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RatingModule } from 'primeng/rating';
 import { ButtonModule } from 'primeng/button';
-import { ReviewService } from '../../services/review.service';
-import { createReview } from '../../../types';
+import { ReviewService } from '../../services/review/review.service';
+import { createReview, ShortReview, UpdateReview } from '../../../types';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -31,6 +31,11 @@ export class ReviewPopUpComponent {
   @Input({ required: true }) display: boolean = false;
   @Output() displayChange = new EventEmitter<boolean>();
   @Input({ required: true }) mediaId!: number;
+  @Input({ required: true }) review: ShortReview = {
+    id: -1,
+    reviewScore: 0,
+    writtenReview: '',
+  };
 
   reviewForm = this.formBuilder.group({
     reviewScore: 0,
@@ -45,19 +50,46 @@ export class ReviewPopUpComponent {
   onConfirm() {
     const { reviewScore, writenReview } = this.reviewForm.value;
 
-    const createReview: createReview = {
-      mediaId: this.mediaId,
-      reviewScore: reviewScore || 1,
-      writenReview: writenReview || '',
-    };
-
     // TODO: Add toasts
 
+    if (this.review.id === -1) {
+      this.createReview({
+        mediaId: this.mediaId,
+        reviewScore: reviewScore || 1,
+        writtenReview: writenReview || '',
+      });
+    } else {
+      this.updateReview({
+        reviewScore: reviewScore || 1,
+        writtenReview: writenReview || '',
+      });
+    }
+  }
+
+  createReview(createReview: createReview) {
     this.authService.getAccessTokenSilently().subscribe((token) => {
       this.reviewService.createReview(createReview, token).subscribe(() => {
         this.display = false;
         this.displayChange.emit(this.display);
       });
+    });
+  }
+
+  updateReview(updateReview: UpdateReview) {
+    this.authService.getAccessTokenSilently().subscribe((token) => {
+      this.reviewService
+        .updateReview(this.review.id, updateReview, token)
+        .subscribe(() => {
+          this.display = false;
+          this.displayChange.emit(this.display);
+        });
+    });
+  }
+
+  ngOnChanges() {
+    this.reviewForm.patchValue({
+      reviewScore: this.review.reviewScore,
+      writenReview: this.review.writtenReview,
     });
   }
 }

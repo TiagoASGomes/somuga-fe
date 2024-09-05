@@ -1,0 +1,17 @@
+.reviewsContainer {
+    border-top: 2px solid black;
+
+  .reviewContainer {
+    border: 2px solid black;
+    border-top: none;
+  }
+  .review-left {
+    border-right: 2px solid black;
+    padding: 1rem;
+  }
+
+  .review-right {
+    padding-left: 0;
+  }
+
+}

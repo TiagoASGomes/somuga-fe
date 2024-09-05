@@ -1,10 +1,9 @@
 <div class="wrapper">
-  <div *ngIf="game" class="row gap-2">
+  <div *ngIf="game" class="row gap-2 gameInfo">
     <app-media-page-title-card
       [media]="game"
-      [isLiked]="isLiked"
-      [isReviewed]="isReviewed"
-      (likeMedia)="likeGame()"
+      [(isLiked)]="isLiked"
+      [(review)]="review"
       (reviewMedia)="toggleReviewPopUp($event)"
     ></app-media-page-title-card>
     <div>
@@ -23,4 +22,9 @@
   <app-media-reviews *ngIf="game" [mediaId]="game.id"></app-media-reviews>
 </div>
 
-<app-review-pop-up *ngIf="game" [mediaId]="game.id" [(display)]="displayReviewPopUp"></app-review-pop-up>
+<app-review-pop-up
+  *ngIf="game"
+  [mediaId]="game.id"
+  [(display)]="displayReviewPopUp"
+  [review]="review"
+></app-review-pop-up>

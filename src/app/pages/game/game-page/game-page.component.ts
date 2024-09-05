@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Game } from '../../../../types';
-import { GameService } from '../../../services/game.service';
+import { Game, Review, ShortReview, UpdateReview } from '../../../../types';
+import { GameService } from '../../../services/game/game.service';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -17,14 +17,18 @@ export class GamePageComponent {
   ) {}
   game: Game | undefined;
   isLiked = false;
-  isReviewed = false;
+  review: ShortReview = {
+    id: -1,
+    reviewScore: 0,
+    writtenReview: '',
+  };
   displayReviewPopUp = false;
 
   fetchGame(id: string, token: string) {
     this.gameService.getGame(id, token).subscribe({
       next: (game) => {
         this.game = game.game;
-        this.isLiked = game.like;
+        this.isLiked = game.liked;
       },
       error: (error) => {
         console.error('There was an error!', error);
@@ -33,11 +37,7 @@ export class GamePageComponent {
   }
 
   toggleReviewPopUp(display: boolean) {
-    this.displayReviewPopUp = !this.displayReviewPopUp;
-  }
-
-  likeGame() {
-    this.isLiked = !this.isLiked;
+    this.displayReviewPopUp = display;
   }
 
   fetchGameRequest(id: string) {

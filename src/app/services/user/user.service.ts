@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
-import { CreateUser, User } from '../../types';
-import { environment } from '../../environments/environment';
+import { ApiService } from '../api.service';
+import { CreateUser, User } from '../../../types';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({

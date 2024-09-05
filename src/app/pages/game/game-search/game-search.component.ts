@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { GameService } from '../../../services/game.service';
+import { GameService } from '../../../services/game/game.service';
 import {
   DeveloperList,
   Game,
@@ -9,6 +9,9 @@ import {
 } from '../../../../types';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Paginator } from 'primeng/paginator';
+import { DeveloperService } from '../../../services/game/developer/developer.service';
+import { GenreService } from '../../../services/game/genre/genre.service';
+import { PlatformService } from '../../../services/game/platform/platform.service';
 
 interface DropdownOption {
   name: string;
@@ -22,7 +25,10 @@ interface DropdownOption {
 export class GameSearchComponent {
   constructor(
     private gameService: GameService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private developerService: DeveloperService,
+    private platformService: PlatformService,
+    private genreService: GenreService
   ) {}
 
   @ViewChild('paginator') paginator: Paginator | undefined;
@@ -37,7 +43,7 @@ export class GameSearchComponent {
     genre: [],
     platform: [],
   };
-  size: number = 20;
+  size: number = 25;
   totalRecords: number = 0;
   developerPage: number = 0;
 
@@ -77,7 +83,7 @@ export class GameSearchComponent {
   }
 
   fetchDevelopers(page: number, size: number) {
-    this.gameService.getDevelopers({ page, size }).subscribe({
+    this.developerService.getDevelopers({ page, size }, {}).subscribe({
       next: (data: DeveloperList) => {
         const newDevs = data.developers.map((dev) => ({
           name: dev.developerName,
@@ -94,7 +100,7 @@ export class GameSearchComponent {
   }
 
   fetchGenres() {
-    this.gameService.getGenres().subscribe({
+    this.genreService.getGenres().subscribe({
       next: (data: Genre[]) => {
         this.genres = data.map((genre) => ({ name: genre.genreName }));
       },
@@ -105,7 +111,7 @@ export class GameSearchComponent {
   }
 
   fetchPlatforms() {
-    this.gameService.getPlatforms().subscribe({
+    this.platformService.getPlatforms().subscribe({
       next: (data) => {
         this.platforms = data.map((platform) => ({
           name: platform.platformName,

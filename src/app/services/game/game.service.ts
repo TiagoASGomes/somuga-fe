@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
+import { ApiService } from '../api.service';
 import {
   DeveloperList,
   Game,
@@ -9,9 +9,9 @@ import {
   Genre,
   PaginationParams,
   Platform,
-} from '../../types';
+} from '../../../types';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -39,31 +39,6 @@ export class GameService {
     return this.apiService.get<GameLike>(
       environment.apiUrl + 'game/public/' + id,
       options
-    );
-  }
-
-  getDevelopers(pageParams: PaginationParams): Observable<DeveloperList> {
-    return this.apiService.get<DeveloperList>(
-      environment.apiUrl + 'game/developer/public',
-      {
-        params: {
-          ...pageParams,
-        },
-      }
-    );
-  }
-
-  getGenres(): Observable<Genre[]> {
-    return this.apiService.get<Genre[]>(
-      environment.apiUrl + 'game/genre/public',
-      {}
-    );
-  }
-
-  getPlatforms(): Observable<Platform[]> {
-    return this.apiService.get<Platform[]>(
-      environment.apiUrl + 'game/platform/public',
-      {}
     );
   }
 }

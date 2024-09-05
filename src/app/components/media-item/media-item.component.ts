@@ -27,7 +27,7 @@ export class MediaItemComponent {
   }
 
   ngOnInit() {
-    this.stars = this.media.averageRating / 2;
+    this.stars = this.media.averageRating;
     this.checkMediaType();
   }
 }

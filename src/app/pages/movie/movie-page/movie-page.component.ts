@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieService } from '../../../services/movie.service';
-import { Movie, Roles } from '../../../../types';
+import { MovieService } from '../../../services/movie/movie.service';
+import { Movie, Roles, ShortReview } from '../../../../types';
 
 @Component({
   selector: 'app-movie-page',
@@ -15,14 +15,18 @@ export class MoviePageComponent {
   ) {}
   movie: Movie | undefined;
   isLiked = false;
-  isReviewed = false;
+  review: ShortReview = {
+    id: -1,
+    reviewScore: 0,
+    writtenReview: '',
+  };
   displayReviewPopUp = false;
 
   fetchMovie(id: string) {
     this.movieService.getMovie(id).subscribe({
       next: (movie) => {
         this.movie = movie.movie;
-        this.isLiked = movie.like;
+        this.isLiked = movie.liked;
       },
       error: (error) => {
         console.error('There was an error!', error);
@@ -61,10 +65,6 @@ export class MoviePageComponent {
 
   toggleReviewPopUp(display: boolean) {
     this.displayReviewPopUp = !this.displayReviewPopUp;
-  }
-
-  like() {
-    this.isLiked = !this.isLiked;
   }
 
   ngOnInit() {
