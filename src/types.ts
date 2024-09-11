@@ -51,7 +51,11 @@ export interface MovieSearchParams extends SearchParams {
   crewIds?: number[];
 }
 
-export interface DeveloperSearchParams extends SearchParams {
+export interface GamePropertieSearchParam extends SearchParams {
+  name?: string;
+}
+
+export interface CastSearchParam extends SearchParams {
   name?: string;
 }
 
@@ -64,6 +68,8 @@ export interface Media {
   likes: number;
   mediaUrl: string;
   imageUrl: string;
+  movieRole?: string;
+  characterName?: string;
 }
 
 export interface CreateGame {
@@ -71,7 +77,7 @@ export interface CreateGame {
   releaseDate: string;
   developerId: number;
   genreIds: number[];
-  platformIds: number[];
+  platformsIds: number[];
   description: string;
   mediaUrl: string;
   imageUrl?: string;
@@ -103,6 +109,10 @@ export interface DeveloperList {
   count: number;
 }
 
+export interface CreateDeveloper {
+  developerName: string;
+}
+
 export interface Genre {
   id: number;
   genreName: string;
@@ -125,6 +135,7 @@ export interface CreateMovie {
 
 export interface CreateRoles {
   movieCrewId: number;
+  movieCrewName?: string;
   movieRole: string;
   characterName?: string;
 }
@@ -151,6 +162,10 @@ export interface Roles {
   characterName: string;
 }
 
+export interface CreateCrew {
+  fullName: string;
+}
+
 export interface CreateLike {
   mediaId: number;
 }
@@ -164,6 +179,11 @@ export interface Like {
 export interface LikeList {
   likes: Like[];
   count: number;
+}
+
+export interface LikeSearchParams extends SearchParams {
+  userId?: string;
+  mediaId?: number;
 }
 
 export interface User {
@@ -235,4 +255,9 @@ export interface ShortReview {
 export interface ReviewList {
   reviews: Review[];
   count: number;
+}
+
+export interface DropdownOption {
+  id: number;
+  name: string;
 }

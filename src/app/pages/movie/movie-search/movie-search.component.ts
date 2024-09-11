@@ -7,12 +7,11 @@ import {
 } from '../../../../types';
 import { MovieService } from '../../../services/movie/movie.service';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { Paginator } from 'primeng/paginator';
 import { CrewService } from '../../../services/movie/crew/crew.service';
 
 interface DropdownOption {
   name: string;
-  value: number;
+  id: number;
 }
 
 @Component({
@@ -21,8 +20,6 @@ interface DropdownOption {
   styleUrl: './movie-search.component.scss',
 })
 export class MovieSearchComponent {
-  @ViewChild('paginator') paginator: Paginator | undefined;
-
   constructor(
     private movieService: MovieService,
     private formBuilder: FormBuilder,
@@ -36,6 +33,8 @@ export class MovieSearchComponent {
   };
   size: number = 25;
   totalRecords: number = 0;
+  resetPage: boolean = false;
+  addMovieDisplay: boolean = false;
 
   searchParamsForm = this.formBuilder.group({
     title: [''],
@@ -44,15 +43,13 @@ export class MovieSearchComponent {
 
   changeParams() {
     const { title, crewIds } = this.searchParamsForm.value;
-    console.log(crewIds);
-    console.log(title);
 
     this.searchParams = {
       title: title || '',
-      crewIds: crewIds?.map((c: DropdownOption) => c.value) || [],
+      crewIds: crewIds?.map((c: DropdownOption) => c.id) || [],
     };
 
-    this.resetPaginator();
+    this.resetPage = true;
     this.fetchMovies(0, this.size);
   }
 
@@ -69,11 +66,11 @@ export class MovieSearchComponent {
   }
 
   fetchCast(page: number, size: number) {
-    this.crewService.getCast({ page, size }).subscribe({
+    this.crewService.getCast({ page, size }, {}).subscribe({
       next: (data: MovieCrewList) => {
         const newCast = data.movieCrews.map((c) => ({
           name: c.name,
-          value: c.id,
+          id: c.id,
         }));
         this.cast = [...this.cast, ...newCast];
         if (this.cast.length < data.count) {
@@ -89,9 +86,9 @@ export class MovieSearchComponent {
   onPageChange(event: any) {
     this.fetchMovies(event.page, event.rows);
   }
-
-  resetPaginator() {
-    this.paginator?.changePage(0);
+  
+  toggleAddMovie() {
+    this.addMovieDisplay = true;
   }
 
   ngOnInit() {

@@ -1,6 +1,10 @@
-<div class="wrapper">
+<div class="wrapper mh-5">
   <h1 class="name">{{ developer.developerName }}</h1>
-  <div class="row wrap gap-2 space-between">
-    <app-media-item *ngFor="let game of games" [media]="game"></app-media-item>
-  </div>
+  <app-media-list
+    [medias]="games"
+    [size]="size"
+    [totalRecords]="totalRecords"
+    (onPageChange)="onPageChange($event)"
+    [(resetPaginator)]="resetPage"
+  ></app-media-list>
 </div>

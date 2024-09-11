@@ -1,22 +1,38 @@
 <div class="wrapper">
-  <div *ngIf="game" class="row gap-2 gameInfo">
+  <div *ngIf="game" class="row gap-2">
     <app-media-page-title-card
       [media]="game"
       [(isLiked)]="isLiked"
       [(review)]="review"
       (reviewMedia)="toggleReviewPopUp($event)"
     ></app-media-page-title-card>
-    <div>
-      <h3>Description:</h3>
-      <p>{{ game.description }}</p>
+    <div class="column gap-05">
       <h3>Released:</h3>
       <p>{{ game.releaseDate | date : "longDate" }}</p>
       <h3>Developer:</h3>
-      <p>{{ game.developer.developerName }}</p>
+      <a [routerLink]="'../../developer/' + game.developer.id">
+        <p class="clickable">{{ game.developer.developerName }}</p></a
+      >
       <h3>Genres:</h3>
-      <p *ngFor="let genre of game.genres">{{ genre.genreName }}</p>
+      <ul class="propertie-list">
+        <li *ngFor="let genre of game.genres">
+          <a [routerLink]="'../../genre/' + genre.id"
+            ><p class="clickable">{{ genre.genreName }}</p></a
+          >
+        </li>
+      </ul>
       <h3>Platforms:</h3>
-      <p *ngFor="let platform of game.platforms">{{ platform.platformName }}</p>
+      <ul class="propertie-list">
+        <li *ngFor="let platform of game.platforms">
+          <a [routerLink]="'../../platform/' + platform.id"
+            ><p class="clickable">
+              {{ platform.platformName }}
+            </p></a
+          >
+        </li>
+      </ul>
+      <h3>Description:</h3>
+      <p class="description">{{ game.description }}</p>
     </div>
   </div>
   <app-media-reviews *ngIf="game" [mediaId]="game.id"></app-media-reviews>

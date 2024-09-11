@@ -26,6 +26,7 @@ export class DeveloperPageComponent {
   searchParams = {
     developer: '',
   };
+  resetPage: boolean = false;
 
   fetchDeveloper(id: string) {
     this.developerService.getById(id).subscribe({
@@ -45,12 +46,15 @@ export class DeveloperPageComponent {
       next: (data: GameList) => {
         this.games = data.games;
         this.totalRecords = data.count;
-        console.log(this.games);
       },
       error: (error) => {
         console.error('There was an error!', error);
       },
     });
+  }
+
+  onPageChange(event: any) {
+    this.fetchGamesByDeveloper(event.page, event.rows);
   }
 
   ngOnInit() {

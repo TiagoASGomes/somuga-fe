@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api.service';
 import {
+  CreateGame,
   DeveloperList,
   Game,
   GameLike,
@@ -39,6 +40,19 @@ export class GameService {
     return this.apiService.get<GameLike>(
       environment.apiUrl + 'game/public/' + id,
       options
+    );
+  }
+
+  createGame(game: CreateGame, token: string): Observable<Game> {
+    return this.apiService.post<Game>(
+      environment.apiUrl + 'game/private',
+      game,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          contentType: 'application/json',
+        },
+      }
     );
   }
 }

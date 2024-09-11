@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { ReviewService } from '../../services/review/review.service';
 import { createReview, ShortReview, UpdateReview } from '../../../types';
 import { AuthService } from '@auth0/auth0-angular';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @Component({
   selector: 'app-review-pop-up',
@@ -18,6 +19,7 @@ import { AuthService } from '@auth0/auth0-angular';
     RatingModule,
     ButtonModule,
     ReactiveFormsModule,
+    InputTextareaModule,
   ],
   templateUrl: './review-pop-up.component.html',
   styleUrl: './review-pop-up.component.scss',

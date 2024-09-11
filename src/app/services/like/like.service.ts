@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api.service';
 import { environment } from '../../../environments/environment';
-import { CreateLike, Like } from '../../../types';
+import {
+  CreateLike,
+  Like,
+  LikeList,
+  LikeSearchParams,
+  PaginationParams,
+} from '../../../types';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -27,6 +33,21 @@ export class LikeService {
       },
       params: {
         mediaId: mediaId.toString(),
+      },
+    });
+  }
+
+  getLikes(
+    likeSearchParams: LikeSearchParams,
+    paginationParams: PaginationParams
+  ): Observable<LikeList> {
+    return this.apiService.get(environment.apiUrl + 'like/public', {
+      headers: {
+        contentType: 'application/json',
+      },
+      params: {
+        ...likeSearchParams,
+        ...paginationParams,
       },
     });
   }

@@ -1,0 +1,163 @@
+<p-dialog
+  header="Add a Movie"
+  [(visible)]="display"
+  [modal]="true"
+  [closable]="false"
+>
+  <div class="column gap-1 full-center movieForm" [formGroup]="movieForm">
+    <div class="column gap-05">
+      <label for="title">Title:</label>
+      <input
+        pInputText
+        type="text"
+        formControlName="title"
+        placeholder="Enter the title of the movie"
+      />
+    </div>
+    <div class="column gap-05">
+      <label for="releaseDate">Release Date:</label>
+      <input
+        pInputText
+        type="date"
+        formControlName="releaseDate"
+        placeholder="Enter the release date of the movie"
+      />
+    </div>
+    <div class="column gap-05">
+      <label for="releaseDate">Duration:</label>
+      <input
+        pInputText
+        type="number"
+        formControlName="releaseDate"
+        placeholder="Enter the duration of the movie in minutes"
+      />
+    </div>
+    <div class="column gap-05">
+      <label for="description">Description:</label>
+      <textarea
+        pInputTextarea
+        formControlName="description"
+        placeholder="Enter the description of the movie"
+      ></textarea>
+    </div>
+    <div class="column gap-05">
+      <label for="imageUrl">Image URL:</label>
+      <input
+        pInputText
+        formControlName="imageUrl"
+        placeholder="Enter an URL for the movie's image"
+      />
+    </div>
+    <div class="column gap-05">
+      <label for="mediaUrl">Movie URL:</label>
+      <input
+        pInputText
+        formControlName="mediaUrl"
+        placeholder="Enter an URL for an external source of the movie"
+      />
+    </div>
+    <p-button
+      label="Add Cast member"
+      icon="pi pi-plus"
+      (click)="showAddCast()"
+      iconPos="right"
+    ></p-button>
+    <div class="column gap-05" *ngIf="cast.length > 0">
+      <label for="cast">Cast:</label>
+      <ul class="column gap-05">
+        <li *ngFor="let member of cast" class="row gap-05">
+          <div class="row gap-05">
+            <p>{{ member.movieCrewName }}</p>
+            <p *ngIf="member.movieRole !== 'ACTOR'">
+              AS {{ member.movieRole | formatRole }}
+            </p>
+            <span *ngIf="member.movieRole === 'ACTOR'"
+              >AS {{ member.characterName }}</span
+            >
+          </div>
+          <button
+            pButton
+            icon="pi pi-times"
+            (click)="removeCast(member)"
+            class="p-button-danger"
+          ></button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <p-footer>
+    <div class="row full-center mt-1">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="onConfirm()"
+        label="Confirm"
+        [class.disabled]="!movieForm.valid"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon="pi pi-times"
+        (click)="onCancel()"
+        label="Cancel"
+      ></button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-dialog
+  header="Add a Cast Member"
+  [(visible)]="displayAddCast"
+  [modal]="true"
+  [closable]="false"
+>
+  <div class="column gap-1 align-center castForm" [formGroup]="castForm">
+    <div class="column gap-05">
+      <label for="crewId">Name:</label>
+      <p-dropdown
+        formControlName="movieCrewId"
+        [options]="crew"
+        optionLabel="name"
+        placeholder="Select a crew member"
+      ></p-dropdown>
+    </div>
+    <div class="column gap-05">
+      <label for="role">Role:</label>
+      <p-dropdown
+        formControlName="movieRole"
+        [options]="roles"
+        placeholder="Select a role"
+        (onChange)="onRoleChange($event)"
+      ></p-dropdown>
+    </div>
+    <div class="column gap-05" *ngIf="showCharacterName">
+      <label for="character">Character played:</label>
+      <input
+        pInputText
+        type="text"
+        formControlName="characterName"
+        placeholder="Enter the character played by the actor"
+      />
+    </div>
+  </div>
+  <p-footer>
+    <div class="row full-center">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="onConfirmCast()"
+        label="Confirm"
+        [class.disabled]="!castForm.valid"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon="pi pi-times"
+        (click)="onCancelCast()"
+        label="Cancel"
+      ></button>
+    </div>
+  </p-footer>
+</p-dialog>

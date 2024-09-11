@@ -23,6 +23,10 @@ app-root {
   flex-direction: column;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .row {
   display: flex;
   flex-direction: row;
@@ -90,4 +94,40 @@ app-root {
 
 .mt-1 {
   margin-top: 1rem;
+}
+
+.mb-1{
+  margin-bottom: 1rem;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  text-decoration: underline;
+}
+
+.liked-media {
+  .p-paginator {
+    width: 10rem;
+  }
+}
+
+.p-dataview{
+  border: 1px solid #2d2d2d;
+}
+
+.p-carousel-container {
+  background-color: #1f2937;
+  border-radius: 5px;
+  border: 1px solid #2d2d2d;
+}
+
+.p-carousel-item{
+  height: 30rem;
+}
+
+.p-divider{
+  margin-bottom: 0;
 }

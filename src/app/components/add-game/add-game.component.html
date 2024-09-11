@@ -1,0 +1,97 @@
+<p-dialog
+  header="Add a Game"
+  [(visible)]="display"
+  [modal]="true"
+  [closable]="false"
+>
+  <div class="column gap-1 full-center" [formGroup]="gameForm">
+    <div class="column gap-05">
+      <label for="title">Title:</label>
+      <input
+        pInputText
+        type="text"
+        formControlName="title"
+        placeholder="Enter the title of the game"
+      />
+    </div>
+    <div class="column gap-05">
+      <label for="releaseDate">Release Date:</label>
+      <input
+        pInputText
+        type="date"
+        formControlName="releaseDate"
+        placeholder="Enter the release date of the game"
+      />
+    </div>
+    <div class="column gap-05">
+      <label for="developer">Developer:</label>
+      <p-dropdown
+        formControlName="developerId"
+        [options]="developers"
+        optionLabel="name"
+        placeholder="Select a developer"
+      ></p-dropdown>
+    </div>
+    <div class="column gap-05">
+      <label for="platforms">Platforms:</label>
+      <p-multiSelect
+        formControlName="platformsIds"
+        [options]="platforms"
+        optionLabel="name"
+        placeholder="Select platforms"
+      ></p-multiSelect>
+    </div>
+    <div class="column gap-05">
+      <label for="genres">Genres:</label>
+      <p-multiSelect
+        formControlName="genreIds"
+        [options]="genres"
+        optionLabel="name"
+        placeholder="Select genres"
+      ></p-multiSelect>
+    </div>
+    <div class="column gap-05">
+      <label for="description">Description:</label>
+      <textarea
+        pInputTextarea
+        formControlName="description"
+        placeholder="Enter the description of the game"
+      ></textarea>
+    </div>
+    <div class="column gap-05">
+      <label for="imageUrl">Image URL:</label>
+      <input
+        pInputText
+        formControlName="imageUrl"
+        placeholder="Enter an URL for the game's image"
+      />
+    </div>
+    <div class="column gap-05">
+      <label for="mediaUrl">Game URL:</label>
+      <input
+        pInputText
+        formControlName="mediaUrl"
+        placeholder="Enter an URL for an external source of the game"
+      />
+    </div>
+  </div>
+  <p-footer>
+    <div class="row full-center">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="onConfirm()"
+        label="Confirm"
+        [class.disabled]="!gameForm.valid"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon="pi pi-times"
+        (click)="onCancel()"
+        label="Cancel"
+      ></button>
+    </div>
+  </p-footer>
+</p-dialog>

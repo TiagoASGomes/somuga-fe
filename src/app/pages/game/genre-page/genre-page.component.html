@@ -1,0 +1,10 @@
+<div class="wrapper mh-5">
+  <h1 class="name">{{ genre.genreName }}</h1>
+  <app-media-list
+    [medias]="games"
+    [size]="size"
+    [totalRecords]="totalRecords"
+    (onPageChange)="onPageChange($event)"
+    [(resetPaginator)]="resetPage"
+  ></app-media-list>
+</div>

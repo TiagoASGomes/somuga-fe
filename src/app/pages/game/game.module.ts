@@ -15,6 +15,13 @@ import { ReviewPopUpComponent } from '../../components/review-pop-up/review-pop-
 import { DeveloperSearchComponent } from './developer-search/developer-search.component';
 import { DeveloperPageComponent } from './developer-page/developer-page.component';
 import { MediaListComponent } from '../../components/media-list/media-list.component';
+import { PlatformSearchComponent } from './platform-search/platform-search.component';
+import { PlatformPageComponent } from './platform-page/platform-page.component';
+import { GenreSearchComponent } from './genre-search/genre-search.component';
+import { GenrePageComponent } from './genre-page/genre-page.component';
+import { AddGameComponent } from '../../components/add-game/add-game.component';
+import { AddDeveloperComponent } from '../../components/add-developer/add-developer.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -22,6 +29,10 @@ import { MediaListComponent } from '../../components/media-list/media-list.compo
     GameSearchComponent,
     DeveloperSearchComponent,
     DeveloperPageComponent,
+    PlatformSearchComponent,
+    PlatformPageComponent,
+    GenreSearchComponent,
+    GenrePageComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +48,9 @@ import { MediaListComponent } from '../../components/media-list/media-list.compo
     MediaReviewsComponent,
     ReviewPopUpComponent,
     MediaListComponent,
+    AddGameComponent,
+    AddDeveloperComponent,
+    InputTextModule,
   ],
 })
 export class GameModule {}

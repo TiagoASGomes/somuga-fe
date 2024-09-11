@@ -1,0 +1,30 @@
+<div class="column gap-1 full-center mh-5">
+  <div class="searchBar row gap-1 full-center" [formGroup]="searchForm">
+    <div class="row gap-1 full-center">
+      <label for="name">Title</label>
+      <input
+        pInputText
+        formControlName="name"
+        type="text"
+        id="Title"
+        placeholder="Name"
+      />
+    </div>
+    <button
+      pButton
+      type="button"
+      label="Search"
+      (click)="changeParams()"
+      class="p-button-raised p-button-rounded"
+    ></button>
+  </div>
+  <div class="row wrap gap-2 space-between container">
+    <p
+      class="clickable"
+      *ngFor="let platform of platforms"
+      [routerLink]="platform.id.toString()"
+    >
+      {{ platform.platformName }}
+    </p>
+  </div>
+</div>

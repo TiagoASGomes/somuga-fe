@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { DeveloperService } from '../../../services/game/developer/developer.service';
 import { FormBuilder } from '@angular/forms';
-import { Developer, DeveloperSearchParams } from '../../../../types';
+import { Developer, GamePropertieSearchParam } from '../../../../types';
 import { Paginator } from 'primeng/paginator';
 
 @Component({
@@ -17,20 +17,21 @@ export class DeveloperSearchComponent {
     private fb: FormBuilder
   ) {}
 
-  searchParams: DeveloperSearchParams = {
+  searchParams: GamePropertieSearchParam = {
     name: '',
   };
   developers: Developer[] = [];
   totalRecords: number = 0;
-  size = 25;
+  size = 100;
+  displayAddDeveloper: boolean = false;
 
   searchForm = this.fb.group({
     name: [''],
   });
 
-  fetchDevelopers(page: number, size: number) {
+  fetchDevelopers(page: number) {
     this.developerService
-      .getDevelopers({ page, size }, this.searchParams)
+      .getDevelopers({ page, size: this.size }, this.searchParams)
       .subscribe((res) => {
         this.developers = res.developers;
         this.totalRecords = res.count;
@@ -38,7 +39,7 @@ export class DeveloperSearchComponent {
   }
 
   onPageChange(event: any) {
-    this.fetchDevelopers(event.page, event.rows);
+    this.fetchDevelopers(event.page);
   }
 
   changeParams() {
@@ -48,14 +49,18 @@ export class DeveloperSearchComponent {
       name: name || '',
     };
     this.resetPaginator();
-    this.fetchDevelopers(0, this.size);
+    this.fetchDevelopers(0);
   }
 
   resetPaginator() {
     this.paginator?.changePage(0);
   }
 
+  toggleAddDeveloper() {
+    this.displayAddDeveloper = true;
+  }
+
   ngOnInit() {
-    this.fetchDevelopers(0, this.size);
+    this.fetchDevelopers(0);
   }
 }

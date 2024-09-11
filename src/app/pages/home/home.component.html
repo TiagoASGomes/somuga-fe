@@ -1,1 +1,97 @@
-<p>home works!</p>
+<div class="wrapper column top-media">
+  <p-carousel
+    [value]="gameList"
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+    [responsiveOptions]="responsiveOptions"
+    [circular]="true"
+    [autoplayInterval]="5000"
+  >
+    <ng-template pTemplate="header">
+      <h2 class="text-center">Top Games</h2>
+    </ng-template>
+    <ng-template let-game pTemplate="item">
+      <div class="media-card column space-between">
+        <div class="img-container">
+          <a [routerLink]="'../game/info/' + game.id">
+            <img [src]="game.imageUrl" [alt]="game.title" class="media-img"
+          /></a>
+        </div>
+        <div class="text-center">
+          <h3>{{ game.title }}</h3>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+  <p-carousel
+    [value]="movieList"
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+    [responsiveOptions]="responsiveOptions"
+    [circular]="true"
+    [autoplayInterval]="5000"
+  >
+    <ng-template pTemplate="header">
+      <h2 class="text-center">Top Movies</h2>
+    </ng-template>
+    <ng-template let-movie pTemplate="item">
+      <div class="media-card column space-between">
+        <div class="img-container">
+          <a [routerLink]="'../movie/info/' + movie.id">
+            <img [src]="movie.imageUrl" [alt]="movie.title" class="media-img" />
+          </a>
+        </div>
+        <div>
+          <h3 class="text-center">{{ movie.title }}</h3>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+
+  <div *ngIf="isAuthenticated" class="liked-media">
+    <p-dataView [value]="likedMedia">
+      <ng-template pTemplate="header">
+        <h2 class="text-center">Liked Media</h2>
+      </ng-template>
+      <ng-template let-item pTemplate="list">
+        <div class="row space-between">
+          <div *ngFor="let media of likedMedia" class="">
+            <div class="media-card column pad-1">
+              <div class="img-container">
+                <a
+                  [routerLink]="
+                    isGame(media)
+                      ? '../game/info/' + media.id
+                      : '../movie/info/' + media.id
+                  "
+                >
+                  <img
+                    [src]="media.imageUrl"
+                    [alt]="media.title"
+                    class="media-img"
+                /></a>
+              </div>
+              <div class="text-center">
+                <p>{{ media.title }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <p-divider />
+        <div class="column full-center mt-1">
+          <p-paginator
+            [rows]="5"
+            [totalRecords]="totalLikes"
+            (onPageChange)="changePage($event)"
+            [pageLinkSize]="0"
+            [showFirstLastIcon]="false"
+          ></p-paginator>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </div>
+</div>

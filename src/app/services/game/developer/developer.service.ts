@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../api.service';
 import {
+  CreateDeveloper,
   Developer,
   DeveloperList,
-  DeveloperSearchParams,
+  GamePropertieSearchParam,
   PaginationParams,
 } from '../../../../types';
 import { Observable } from 'rxjs';
@@ -17,7 +18,7 @@ export class DeveloperService {
 
   getDevelopers(
     pageParams: PaginationParams,
-    searchParams: DeveloperSearchParams
+    searchParams: GamePropertieSearchParam
   ): Observable<DeveloperList> {
     return this.apiService.get<DeveloperList>(
       environment.apiUrl + 'game/developer/public',
@@ -34,6 +35,22 @@ export class DeveloperService {
     return this.apiService.get<Developer>(
       environment.apiUrl + 'game/developer/public/' + id,
       {}
+    );
+  }
+
+  createDeveloper(
+    developer: CreateDeveloper,
+    token: string
+  ): Observable<Developer> {
+    return this.apiService.post<Developer>(
+      environment.apiUrl + 'game/developer/private',
+      developer,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          contentType: 'application/json',
+        },
+      }
     );
   }
 }

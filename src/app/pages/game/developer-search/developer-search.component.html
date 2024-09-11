@@ -1,4 +1,5 @@
 <div class="column gap-1 full-center mh-5">
+  <p-button label="Add Developer" (onClick)="toggleAddDeveloper()"></p-button>
   <div class="searchBar row gap-1 full-center" [formGroup]="searchForm">
     <div class="row gap-1 full-center">
       <label for="name">Title</label>
@@ -18,7 +19,7 @@
       class="p-button-raised p-button-rounded"
     ></button>
   </div>
-  <div class="row wrap gap-2 space-between">
+  <div class="row wrap gap-2 space-between container">
     <p
       class="clickable"
       *ngFor="let developer of developers"
@@ -30,8 +31,9 @@
   <p-paginator
     [rows]="size"
     [totalRecords]="totalRecords"
-    [rowsPerPageOptions]="[15, 25, 50, 100]"
     (onPageChange)="onPageChange($event)"
     #paginator
   ></p-paginator>
 </div>
+
+<app-add-developer [(display)]="displayAddDeveloper"></app-add-developer>

@@ -1,1 +1,17 @@
-<p>media-list works!</p>
+<div class="wrapper">
+  <div class="row wrap gap-2 space-between">
+    <app-media-item
+      *ngFor="let media of medias"
+      [media]="media"
+    ></app-media-item>
+  </div>
+  <div class="mt-1">
+    <p-paginator
+      [rows]="size"
+      [totalRecords]="totalRecords"
+      [rowsPerPageOptions]="[5, 10, 25, 50]"
+      (onPageChange)="changePage($event)"
+      #paginator
+    ></p-paginator>
+  </div>
+</div>

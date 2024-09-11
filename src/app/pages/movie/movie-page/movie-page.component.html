@@ -6,22 +6,48 @@
       [(review)]="review"
       (reviewMedia)="toggleReviewPopUp($event)"
     ></app-media-page-title-card>
-    <div>
-      <h3>Description:</h3>
-      <p>{{ movie.description }}</p>
+    <div class="column gap-05">
       <h3>Released:</h3>
       <p>{{ movie.releaseDate | date : "longDate" }}</p>
-      <h3>Director:</h3>
-      <p>{{ getDirector() }}</p>
-      <h3>Writers:</h3>
-      <p *ngFor="let writer of getWriters()">{{ writer }}</p>
-      <h3>Producers</h3>
-      <p *ngFor="let producer of getProducers()">{{ producer }}</p>
-      <h3>Actors:</h3>
-      <div *ngFor="let actor of getActors()">
-        <p>{{ actor.fullName }}</p>
-        <p>{{ actor.characterName }}</p>
+      <div class="column gap-05" *ngIf="director">
+        <h3>Director:</h3>
+        <a [routerLink]="'../../cast/' + director.id">
+          <p class="clickable">{{ director.fullName }}</p>
+        </a>
       </div>
+      <div class="column gap-05" *ngIf="writers.length > 0">
+        <h3>Writers:</h3>
+        <ul class="propertie-list">
+          <li *ngFor="let writer of writers">
+            <a [routerLink]="'../../cast/' + writer.id">
+              <p class="clickable">{{ writer.fullName }}</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="column gap-05" *ngIf="producers.length > 0">
+        <h3>Producers:</h3>
+        <ul class="propertie-list">
+          <li *ngFor="let producer of producers">
+            <a [routerLink]="'../../cast/' + producer.id">
+              <p class="clickable">{{ producer.fullName }}</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="column gap-05" *ngIf="actors.length > 0">
+        <h3>Actors:</h3>
+        <ul class="propertie-list">
+          <li *ngFor="let actor of actors" class="row gap-05">
+            <p class="clickable">
+              {{ actor.fullName }}
+            </p>
+            <p>AS {{ actor.characterName }}</p>
+          </li>
+        </ul>
+      </div>
+      <h3>Description:</h3>
+      <p>{{ movie.description }}</p>
     </div>
   </div>
   <app-media-reviews *ngIf="movie" [mediaId]="movie.id"></app-media-reviews>

@@ -4,11 +4,13 @@ import { ButtonModule } from 'primeng/button';
 import { AuthService } from '@auth0/auth0-angular';
 import { LikeService } from '../../services/like/like.service';
 import { ReviewService } from '../../services/review/review.service';
+import { RatingModule } from 'primeng/rating';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-media-page-title-card',
   standalone: true,
-  imports: [ButtonModule],
+  imports: [ButtonModule, RatingModule, FormsModule],
   templateUrl: './media-page-title-card.component.html',
   styleUrl: './media-page-title-card.component.scss',
 })

@@ -1,11 +1,14 @@
-<div class="column gap-2">
+<div class="wrapper column gap-2 full-center">
   <div class="img-container">
-    <img src="{{ media.imageUrl }}" alt="{{ media.title }}" />
+    <img [src]="media.imageUrl" [alt]="media.title" class="media-img" />
   </div>
   <h2>{{ media.title }}</h2>
-  <div class="row gap-1">
-    <div>
-      <p>Likes: {{ media.likes }}</p>
+  <div class="row gap-1 mb-1">
+    <div class="column gap-05 mt">
+      <div class="row gap-05 full-center">
+        <p>{{ media.likes }}</p>
+        <i class="pi pi-thumbs-up"></i>
+      </div>
       <p-button
         [label]="isLiked ? 'Dislike' : 'Like'"
         [icon]="isLiked ? 'pi pi-heart' : 'pi pi-heart-fill'"
@@ -14,8 +17,12 @@
         [disabled]="!isLogged"
       ></p-button>
     </div>
-    <div>
-      <p>Rating: {{ media.averageRating }}</p>
+    <div class="column gap-05">
+      <p-rating
+        [(ngModel)]="media.averageRating"
+        [readonly]="true"
+        iconCancelClass="hidden"
+      ></p-rating>
       <p-button
         [label]="review.id !== -1 ? 'Edit Review' : 'Review'"
         [icon]="review.id !== -1 ? 'pi pi-pencil' : 'pi pi-comment'"

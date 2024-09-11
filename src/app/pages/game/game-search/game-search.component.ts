@@ -2,20 +2,16 @@ import { Component, ViewChild } from '@angular/core';
 import { GameService } from '../../../services/game/game.service';
 import {
   DeveloperList,
+  DropdownOption,
   Game,
   GameList,
   GameSearchParams,
   Genre,
 } from '../../../../types';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { Paginator } from 'primeng/paginator';
 import { DeveloperService } from '../../../services/game/developer/developer.service';
 import { GenreService } from '../../../services/game/genre/genre.service';
 import { PlatformService } from '../../../services/game/platform/platform.service';
-
-interface DropdownOption {
-  name: string;
-}
 
 @Component({
   selector: 'app-game-search',
@@ -31,8 +27,6 @@ export class GameSearchComponent {
     private genreService: GenreService
   ) {}
 
-  @ViewChild('paginator') paginator: Paginator | undefined;
-
   games: Game[] = [];
   platforms: DropdownOption[] = [];
   genres: DropdownOption[] = [];
@@ -46,10 +40,12 @@ export class GameSearchComponent {
   size: number = 25;
   totalRecords: number = 0;
   developerPage: number = 0;
+  resetPage: boolean = false;
+  displayAddGame: boolean = false;
 
   searchParamsForm = this.formBuilder.group({
     title: [''],
-    developer: new FormControl<DropdownOption | null>({ name: '' }),
+    developer: new FormControl<DropdownOption | null>({ name: '', id: 0 }),
     genre: new FormControl<DropdownOption[] | null>([]),
     platform: new FormControl<DropdownOption[] | null>([]),
   });
@@ -66,7 +62,7 @@ export class GameSearchComponent {
       genre: genres || [],
       platform: platforms || [],
     };
-    this.resetPaginator();
+    this.resetPage = true;
     this.fetchGames(0, this.size);
   }
 
@@ -86,6 +82,7 @@ export class GameSearchComponent {
     this.developerService.getDevelopers({ page, size }, {}).subscribe({
       next: (data: DeveloperList) => {
         const newDevs = data.developers.map((dev) => ({
+          id: dev.id,
           name: dev.developerName,
         }));
         this.developers = [...this.developers, ...newDevs];
@@ -100,9 +97,12 @@ export class GameSearchComponent {
   }
 
   fetchGenres() {
-    this.genreService.getGenres().subscribe({
+    this.genreService.getGenres({}).subscribe({
       next: (data: Genre[]) => {
-        this.genres = data.map((genre) => ({ name: genre.genreName }));
+        this.genres = data.map((genre) => ({
+          id: genre.id,
+          name: genre.genreName,
+        }));
       },
       error: (error) => {
         console.error('There was an error!', error);
@@ -111,9 +111,10 @@ export class GameSearchComponent {
   }
 
   fetchPlatforms() {
-    this.platformService.getPlatforms().subscribe({
+    this.platformService.getPlatforms({}).subscribe({
       next: (data) => {
         this.platforms = data.map((platform) => ({
+          id: platform.id,
           name: platform.platformName,
         }));
       },
@@ -125,10 +126,15 @@ export class GameSearchComponent {
 
   onPageChange(event: any) {
     this.fetchGames(event.page, event.rows);
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
   }
 
-  resetPaginator() {
-    this.paginator?.changePage(0);
+  toggleAddGame() {
+    this.displayAddGame = true;
   }
 
   ngOnInit() {

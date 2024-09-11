@@ -1,7 +1,10 @@
 <div class="wrapper mt-1">
-  <div class="column reviewsContainer">
+  <div class="mb-1">
+    <h2 class="text-center">Reviews</h2>
+  </div>
+  <div class="column reviewsContainer mb-1" *ngIf="reviews.length > 0">
     <div class="row gap-2 reviewContainer" *ngFor="let review of reviews">
-      <div class="column pad-1 review-left">
+      <div class="column pad-1 review-left full-center gap-1">
         <div class="">{{ review.user.userName }}</div>
         <p-rating
           [readonly]="true"
@@ -12,11 +15,15 @@
       </div>
       <div class="pad-1 review-right">{{ review.writtenReview }}</div>
     </div>
-    <p-paginator
-      [rows]="size"
-      [totalRecords]="totalRecords"
-      [rowsPerPageOptions]="[5, 10, 25]"
-      (onPageChange)="onPageChange($event)"
-    ></p-paginator>
   </div>
+  <div *ngIf="reviews.length === 0">
+    <div class="text-center mb-1">No reviews found</div>
+  </div>
+  <p-paginator
+    [rows]="size"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[5, 10, 25]"
+    (onPageChange)="onPageChange($event)"
+    [alwaysShow]="false"
+  ></p-paginator>
 </div>

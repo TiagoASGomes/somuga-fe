@@ -1,4 +1,5 @@
 <div class="column gap-1 full-center mh-5">
+  <p-button label="Add Movie" (onClick)="toggleAddMovie()"></p-button>
   <div class="searchBar row gap-1 full-center" [formGroup]="searchParamsForm">
     <div class="row gap-1 full-center">
       <label for="name">Title</label>
@@ -31,17 +32,13 @@
       class="p-button-raised p-button-rounded"
     ></button>
   </div>
-  <div class="row wrap gap-2 space-between">
-    <app-media-item
-      *ngFor="let movie of movies"
-      [media]="movie"
-    ></app-media-item>
-  </div>
-  <p-paginator
-    [rows]="size"
+  <app-media-list
+    [medias]="movies"
+    [size]="size"
     [totalRecords]="totalRecords"
-    [rowsPerPageOptions]="[5, 10, 25, 50]"
     (onPageChange)="onPageChange($event)"
-    #paginator
-  ></p-paginator>
+    [(resetPaginator)]="resetPage"
+  ></app-media-list>
 </div>
+
+<app-add-movie [(display)]="addMovieDisplay" [crew]="cast"></app-add-movie>

@@ -1,0 +1,39 @@
+<div class="column gap-1 full-center mh-5">
+  <p-button label="Add Crew Member" (onClick)="toggleAddCrew()"></p-button>
+  <div class="searchBar row gap-1 full-center" [formGroup]="searchForm">
+    <div class="row gap-1 full-center">
+      <label for="name">Title</label>
+      <input
+        pInputText
+        formControlName="name"
+        type="text"
+        id="Title"
+        placeholder="Name"
+      />
+    </div>
+    <button
+      pButton
+      type="button"
+      label="Search"
+      (click)="changeParams()"
+      class="p-button-raised p-button-rounded"
+    ></button>
+  </div>
+  <div class="row wrap gap-2 space-between container">
+    <p
+      class="clickable"
+      *ngFor="let cast of castMembers"
+      [routerLink]="cast.id.toString()"
+    >
+      {{ cast.name }}
+    </p>
+  </div>
+  <p-paginator
+    [rows]="size"
+    [totalRecords]="totalRecords"
+    (onPageChange)="onPageChange($event)"
+    #paginator
+  ></p-paginator>
+</div>
+
+<app-add-movie-crew [(display)]="displayAddCrew"></app-add-movie-crew>

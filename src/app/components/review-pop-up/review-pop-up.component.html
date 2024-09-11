@@ -5,7 +5,7 @@
   [closable]="false"
 >
   <div class="column gap-1" [formGroup]="reviewForm">
-    <div class="row gap-05">
+    <div class="column gap-05">
       <label for="rating">Rating:</label>
       <p-rating
         formControlName="reviewScore"
@@ -13,26 +13,28 @@
         iconCancelClass="hidden"
       ></p-rating>
     </div>
-    <div class="row gap-05">
+    <div class="column gap-05">
       <label for="review">Review:</label>
-      <textarea formControlName="writenReview" rows="5" cols="30"></textarea>
+      <textarea pInputTextarea formControlName="writenReview" rows="5" cols="30"></textarea>
     </div>
   </div>
   <p-footer>
-    <button
-      type="button"
-      pButton
-      icon="pi pi-check"
-      (click)="onConfirm()"
-      label="Confirm"
-      [class.disabled]="!reviewForm.valid"
-    ></button>
-    <button
-      type="button"
-      pButton
-      icon="pi pi-times"
-      (click)="onCancel()"
-      label="Cancel"
-    ></button>
+    <div class="row full-center">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="onConfirm()"
+        label="Confirm"
+        [class.disabled]="!reviewForm.valid"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon="pi pi-times"
+        (click)="onCancel()"
+        label="Cancel"
+      ></button>
+    </div>
   </p-footer>
 </p-dialog>

@@ -5,6 +5,14 @@
     [routerLink]="'/' + mediaType + '/info/' + media.id"
   />
   <h2 class="title">{{ media.title | truncateString : 20 : "..." }}</h2>
+  <h4 *ngIf="media.movieRole == 'ACTOR'">{{ "As " + media.characterName }}</h4>
+  <h4 *ngIf="media.movieRole == 'DIRECTOR'">
+    {{ "As Director" }}
+  </h4>
+  <h4 *ngIf="media.movieRole == 'WRITER'">{{ "As Writer" }}</h4>
+  <h4 *ngIf="media.movieRole == 'PRODUCER'">
+    {{ "As Producer" }}
+  </h4>
 
   <p>Released: {{ media.releaseDate }}</p>
 

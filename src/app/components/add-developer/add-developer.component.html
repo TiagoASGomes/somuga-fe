@@ -1,0 +1,37 @@
+<p-dialog
+  header="Add a Developer"
+  [(visible)]="display"
+  [modal]="true"
+  [closable]="false"
+>
+  <div class="column gap-1 full-center" [formGroup]="developerForm">
+    <div class="row gap-05">
+      <label for="name">Name:</label>
+      <input
+        pInputText
+        type="text"
+        formControlName="developerName"
+        placeholder="Enter the name of the developer"
+      />
+    </div>
+  </div>
+  <p-footer>
+    <div class="row full-center">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="onConfirm()"
+        label="Confirm"
+        [class.disabled]="!developerForm.valid"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon="pi pi-times"
+        (click)="onCancel()"
+        label="Cancel"
+      ></button>
+    </div>
+  </p-footer>
+</p-dialog>

@@ -38,7 +38,15 @@ export class NavbarComponent {
         {
           label: 'Developers',
           routerLink: ['game/developer'],
-        }
+        },
+        {
+          label: 'Genres',
+          routerLink: ['game/genre'],
+        },
+        {
+          label: 'Platforms',
+          routerLink: ['game/platform'],
+        },
       ],
     },
     {
@@ -48,6 +56,10 @@ export class NavbarComponent {
         {
           label: 'Movie List',
           routerLink: ['movie'],
+        },
+        {
+          label: 'Cast',
+          routerLink: ['movie/cast'],
         },
       ],
     },

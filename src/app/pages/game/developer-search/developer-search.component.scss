@@ -1,7 +1,11 @@
-.clickable {
-  cursor: pointer;
+.searchBar {
+  padding: 1rem;
+  border: 1px solid #2d2d2d;
+  background-color: #1f2937;
+  border-radius: 10px;
 }
 
-.clickable:hover {
-  text-decoration: underline;
+.container{
+  margin: 2rem;
+  width: 75vw;
 }

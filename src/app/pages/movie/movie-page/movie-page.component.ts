@@ -21,12 +21,20 @@ export class MoviePageComponent {
     writtenReview: '',
   };
   displayReviewPopUp = false;
+  director: Roles | undefined;
+  writers: Roles[] = [];
+  producers: Roles[] = [];
+  actors: Roles[] = [];
 
   fetchMovie(id: string) {
     this.movieService.getMovie(id).subscribe({
       next: (movie) => {
         this.movie = movie.movie;
         this.isLiked = movie.liked;
+        this.getDirector();
+        this.getWriters();
+        this.getProducers();
+        this.getActors();
       },
       error: (error) => {
         console.error('There was an error!', error);
@@ -34,33 +42,26 @@ export class MoviePageComponent {
     });
   }
 
-  getDirector(): string {
-    return (
-      this.movie?.crew.find((member) => member.movieRole === 'DIRECTOR')
-        ?.fullName || ''
+  getDirector() {
+    this.director = this.movie?.crew.find(
+      (member) => member.movieRole === 'DIRECTOR'
     );
   }
 
-  getWriters(): string[] {
-    return (
-      this.movie?.crew
-        .filter((member) => member.movieRole === 'WRITER')
-        .map((member) => member.fullName) || []
-    );
+  getWriters() {
+    this.writers =
+      this.movie?.crew.filter((member) => member.movieRole === 'WRITER') || [];
   }
 
-  getProducers(): string[] {
-    return (
-      this.movie?.crew
-        .filter((member) => member.movieRole === 'PRODUCER')
-        .map((member) => member.fullName) || []
-    );
+  getProducers() {
+    this.producers =
+      this.movie?.crew.filter((member) => member.movieRole === 'PRODUCER') ||
+      [];
   }
 
-  getActors(): Roles[] {
-    return (
-      this.movie?.crew.filter((member) => member.movieRole === 'ACTOR') || []
-    );
+  getActors() {
+    this.actors =
+      this.movie?.crew.filter((member) => member.movieRole === 'ACTOR') || [];
   }
 
   toggleReviewPopUp(display: boolean) {
