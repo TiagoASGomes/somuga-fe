@@ -51,7 +51,6 @@ export class AddMovieComponent {
   cast: CreateRoles[] = [];
   roles = [
     { label: 'Director', value: 'DIRECTOR' },
-    { label: 'Producer', value: 'PRODUCER' },
     { label: 'Actor', value: 'ACTOR' },
     { label: 'Writer', value: 'WRITER' },
   ];
