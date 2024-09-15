@@ -50,7 +50,7 @@
     </ng-template>
   </p-carousel>
 
-  <div *ngIf="isAuthenticated" class="liked-media">
+  <div *ngIf="isAuthenticated && likedMedia.length > 0" class="liked-media">
     <p-dataView [value]="likedMedia">
       <ng-template pTemplate="header">
         <h2 class="text-center">Liked Media</h2>
