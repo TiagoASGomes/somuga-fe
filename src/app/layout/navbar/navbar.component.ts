@@ -63,6 +63,10 @@ export class NavbarComponent {
         },
       ],
     },
+    {
+      label: 'Token',
+      routerLink: ['token'],
+    },
   ];
   isLoggedIn: boolean = false;
 

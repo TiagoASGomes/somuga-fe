@@ -21,4 +21,9 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pages/movie/movie.module').then((m) => m.MovieModule),
   },
+  {
+    path: 'token',
+    loadChildren: () =>
+      import('./pages/token/token.module').then((m) => m.TokenModule),
+  },
 ];
