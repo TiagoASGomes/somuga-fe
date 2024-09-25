@@ -53,14 +53,14 @@ export class HomeComponent {
 
   fetchTopRatedMovies() {
     this.movieService
-      .getMovies({ page: 0, size: 15 }, {})
+      .getMovies({ page: 0, size: 15 }, {sort: 'averageRating,desc'})
       .subscribe((movies) => {
         this.movieList = movies.movies;
       });
   }
 
   fetchTopRatedGames() {
-    this.gameService.getGames({ page: 0, size: 15 }, {}).subscribe((games) => {
+    this.gameService.getGames({ page: 0, size: 15 }, {sort: 'averageRating,desc'}).subscribe((games) => {
       this.gameList = games.games;
     });
   }

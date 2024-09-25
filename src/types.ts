@@ -44,11 +44,13 @@ export interface GameSearchParams extends SearchParams {
   developer?: string;
   genre?: string[];
   platform?: string[];
+  sort?: string;
 }
 
 export interface MovieSearchParams extends SearchParams {
   title?: string;
   crewIds?: number[];
+  sort?: string;
 }
 
 export interface GamePropertieSearchParam extends SearchParams {
